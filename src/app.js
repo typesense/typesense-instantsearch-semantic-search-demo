@@ -7,18 +7,14 @@ window.$ = jQuery; // workaround for https://github.com/parcel-bundler/parcel/is
 import instantsearch from 'instantsearch.js/es';
 import {
   searchBox,
-  pagination,
   refinementList,
   hits,
-  stats,
-  sortBy,
   hierarchicalMenu,
   rangeSlider,
   ratingMenu,
   toggleRefinement,
-  hitsPerPage,
   clearRefinements,
-  breadcrumb,
+  configure,
 } from 'instantsearch.js/es/widgets';
 import TypesenseInstantSearchAdapter from 'typesense-instantsearch-adapter';
 
@@ -134,15 +130,8 @@ search.addWidgets([
       loadingIcon: 'stroke-primary',
     },
   }),
-  pagination({
-    container: '#pagination',
-    cssClasses: {
-      list: 'd-flex flex-row justify-content-end',
-      item: 'px-2 d-block',
-      link: 'text-decoration-none',
-      disabledItem: 'text-muted',
-      selectedItem: 'fw-bold text-primary',
-    },
+  configure({
+    hitsPerPage: 18,
   }),
   refinementList({
     limit: 10,
@@ -212,17 +201,6 @@ search.addWidgets([
       selectedItem: 'fw-bold text-primary',
     },
   }),
-  sortBy({
-    container: '#sort-by',
-    items: [
-      { label: 'Relevancy', value: 'products' },
-      { label: 'Price (asc)', value: 'products/sort/price:asc' },
-      { label: 'Price (desc)', value: 'products/sort/price:desc' },
-    ],
-    cssClasses: {
-      select: 'form-select form-select-sm border-none text-black',
-    },
-  }),
   hits({
     container: '#hits',
     templates: {
@@ -265,30 +243,6 @@ search.addWidgets([
       item: 'd-flex flex-column search-result-card mb-1 me-1 p-3',
       loadMore: 'btn btn-primary mx-auto d-block mt-4',
       disabledLoadMore: 'btn btn-dark mx-auto d-block mt-4',
-    },
-  }),
-  hitsPerPage({
-    container: '#hits-per-page',
-    items: [
-      { label: '9 per page', value: 9, default: true },
-      { label: '18 per page', value: 18 },
-    ],
-    cssClasses: {
-      select: 'form-select form-select-sm border-none text-black',
-    },
-  }),
-  stats({
-    container: '#stats',
-    templates: {
-      text: `
-      {{#hasNoResults}}No products{{/hasNoResults}}
-      {{#hasOneResult}}1 product{{/hasOneResult}}
-      {{#hasManyResults}}{{#helpers.formatNumber}}{{nbHits}}{{/helpers.formatNumber}} products{{/hasManyResults}}
-      found in {{processingTimeMS}}ms
-    `,
-    },
-    cssClasses: {
-      text: 'small',
     },
   }),
   clearRefinements({
