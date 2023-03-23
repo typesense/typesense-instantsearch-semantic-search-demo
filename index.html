@@ -13,7 +13,7 @@
 
   <link rel="stylesheet" href="./src/app.scss"/>
 
-  <title>Ecommerce Store with Typesense</title>
+  <title>Semantic Search with Typesense</title>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116415641-9"></script>
@@ -31,7 +31,7 @@
   <div class="row d-flex align-items-center">
     <div class="col-md">
       <h1 class="display-4">
-        Ecommerce Store with Typesense
+        Semantic Search with Typesense
       </h1>
     </div>
     <div class="col-md-2 d-none d-md-block">
@@ -40,15 +40,14 @@
   </div>
 
   <div class="lead mt-2">
-    Besides search experiences,
-    Typesense can also be used to build <strong class="marker-highlight">blazing fast</strong>, <strong class="marker-highlight">browsing experiences</strong> like product listing pages in an ecommerce
-    store.
+    Besides search & browsing experiences,
+    Typesense can also be used to build <strong class="marker-highlight">blazing fast</strong>, <strong class="marker-highlight">semantic search experiences</strong>.
   </div>
 
   <ul class="mt-1">
-    <li>Product data to render the grid is fetched by the front-end from a <strong>Geo-Distributed Typesense Cloud cluster</strong> with nodes in Oregon, Frankfurt and Mumbai.</li>
-    <li>Product API Requests are routed to the node that is closest to the user's location, like a CDN. Since data is geographically distributed, this reduces latency even more for your users, as they browse products.</li>
-    <li>We use Typesense's Vector Search feature (available as of 0.24.0) to power the "Find Similar" link under each product. Click on it to learn more.</li>
+    <li>When you type a query in the search box on the right, it is first sent to an embedding API, that returns the embedding for the typed text.</li>
+    <li>We then do a nearest neighbor search in Typesense with these vectors and render the results.</li>
+    <li>We also use vector search to power the "Find Similar" link under each product. Click on it to learn more.</li>
     <li>See <a href="https://github.com/typesense/showcase-ecommerce-store" target="_blank">Source Code</a>.</li>
   </ul>
 

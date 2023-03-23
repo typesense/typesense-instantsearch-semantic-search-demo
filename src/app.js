@@ -95,6 +95,30 @@ const search = instantsearch({
   searchClient,
   indexName: 'products',
   routing: true,
+  async searchFunction(helper) {
+    let query = helper.getQuery().query;
+
+    if (query !== '') {
+      // Get embedding for the query
+      let response = await fetch(
+        'http://localhost:8000/embedding?' + new URLSearchParams({ q: query }) // <=== Embedding API
+      );
+
+      let parsedResponse = await response.json();
+
+      console.log(parsedResponse);
+
+      // Send the embedding to Typesense to do a nearest neighbor search
+      helper
+        .setQueryParameter(
+          'typesenseVectorQuery', // <=== Special parameter that only works in typesense-instantsearch-adapter@2.7.0-3 and above
+          `vectors:([${parsedResponse['embedding'].join(',')}])`
+        )
+        .search();
+    } else {
+      helper.setQueryParameter('typesenseVectorQuery', null).search();
+    }
+  },
 });
 
 // ============ Begin Widget Configuration

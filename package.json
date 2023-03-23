@@ -1,5 +1,5 @@
 {
-  "name": "showcase-ecommerce-store",
+  "name": "typesense-instantsearch-semantic-search-demo",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -29,6 +29,6 @@
     "instantsearch.js": "^4.49.3",
     "lodash": "^4.17.21",
     "typesense": "^1.5.0",
-    "typesense-instantsearch-adapter": "^2.5.0"
+    "typesense-instantsearch-adapter": "^2.7.0-3"
   }
 }

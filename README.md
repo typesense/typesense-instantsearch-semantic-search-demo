@@ -1,9 +1,9 @@
-# 📦 Instant E-Commerce Store Experience, powered by Typesense
+# 📦 Semantic Search with Typesense + Instantsearch.js
 
-This is a demo that shows how you can use [Typesense's](https://github.com/typesense/typesense) feature set,
-to build not just a search experience, but also a full-fledged product browsing experience for an ecommerce store.
+This is a demo that shows how you can use [Typesense's](https://github.com/typesense/typesense) vector search feature,
+to build a semantic search experience.
 
-See it live here: https://ecommerce-store.typesense.org/
+Learn more about Vector Search here: [https://typesense.org/docs/0.24.0/api/vector-search.html](https://typesense.org/docs/0.24.0/api/vector-search.html).
 
 ## Tech Stack
 
@@ -15,10 +15,11 @@ Typesense Adapter for InstantSearch.js</a>.
 - `src/` and `index.html` - contain the frontend UI components.
 - `scripts/indexer` - contains the script to index the book data into Typesense.
 - `scripts/data` - contains a small sample subset of products.
+- `server` - contains the API server that generates embeddings given a query.
 
-## Development
+## How to
 
-To run this project locally, install the dependencies and run the local server:
+Index sample dataset:
 
 ```shell
 npm install
@@ -27,15 +28,26 @@ npm run typesenseServer
 ln -s .env.development .env
 
 npm run indexer
+```
 
+Start Embedding API server:
+
+```shell
+cd server
+
+pip install -r requirements.txt
+
+uvicorn main:app --reload
+```
+
+Start FE app:
+
+```shell
 npm start
 ```
 
-Open http://localhost:3000 to see the app.
+Open http://localhost:3001 to see the app.
 
-## Deployment
-
-This demo is hosted on Cloudflare pages. Pushing to master will automatically trigger a deployment.
 
 ## Credits
 
