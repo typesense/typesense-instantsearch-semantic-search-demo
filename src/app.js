@@ -15,6 +15,7 @@ import {
   toggleRefinement,
   clearRefinements,
   configure,
+  pagination,
 } from 'instantsearch.js/es/widgets';
 import TypesenseInstantSearchAdapter from 'typesense-instantsearch-adapter';
 
@@ -93,6 +94,8 @@ const search = instantsearch({
   routing: true,
   async searchFunction(helper) {
     let query = helper.getQuery().query;
+    const page = helper.getPage(); // Retrieve the current page
+    const totalNearestNeighborsToFetch = 1000;
 
     if (query !== '') {
       // Get embedding for the query
@@ -108,11 +111,17 @@ const search = instantsearch({
       helper
         .setQueryParameter(
           'typesenseVectorQuery', // <=== Special parameter that only works in typesense-instantsearch-adapter@2.7.0-3 and above
-          `vectors:([${parsedResponse['embedding'].join(',')}])`
+          `vectors:([${parsedResponse['embedding'].join(
+            ','
+          )}], k:${totalNearestNeighborsToFetch})`
         )
+        .setPage(page)
         .search();
     } else {
-      helper.setQueryParameter('typesenseVectorQuery', null).search();
+      helper
+        .setQueryParameter('typesenseVectorQuery', null)
+        .setPage(page)
+        .search();
     }
   },
 });
@@ -131,7 +140,7 @@ search.addWidgets([
     },
   }),
   configure({
-    hitsPerPage: 18,
+    hitsPerPage: 6,
   }),
   refinementList({
     limit: 10,
@@ -249,6 +258,16 @@ search.addWidgets([
     container: '#clear-refinements',
     cssClasses: {
       button: 'btn btn-primary',
+    },
+  }),
+  pagination({
+    container: '#pagination',
+    cssClasses: {
+      list: 'd-flex flex-row justify-content-end',
+      item: 'px-2 d-block',
+      link: 'text-decoration-none',
+      disabledItem: 'text-muted',
+      selectedItem: 'fw-bold text-primary',
     },
   }),
 ]);
