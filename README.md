@@ -1,9 +1,10 @@
 # 📦 Semantic Search with Typesense + Instantsearch.js
 
-This is a demo that shows how you can use [Typesense's](https://github.com/typesense/typesense) vector search feature,
-to build a semantic search experience.
+This is a demo that shows how you can use [Typesense's](https://github.com/typesense/typesense) vector search feature, to build a semantic search experience.
 
-Learn more about Vector Search here: [https://typesense.org/docs/0.24.0/api/vector-search.html](https://typesense.org/docs/0.24.0/api/vector-search.html).
+**NOTE: ⚠️** This demo uses Typesense version 0.24.0 which did not have built-in embedding generation. But in v0.25.0, we've added built-in emebedding generation, which makes it even more easy to build semantic search out of the box, without the need for an external embedding service. Here's a newer demo that takes advantage of this feature: [https://github.com/typesense/showcase-hn-comments-semantic-search](https://github.com/typesense/showcase-hn-comments-semantic-search).
+
+Learn more about Vector Search here: [https://typesense.org/docs/0.25.0/api/vector-search.html](https://typesense.org/docs/0.25.0/api/vector-search.html).
 
 ## Tech Stack
 
